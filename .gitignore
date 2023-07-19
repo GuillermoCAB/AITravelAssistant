@@ -1,0 +1,12 @@
+coverage.json
+node_modules
+typechain
+coverage
+build
+.env
+
+#IDE files
+package-lock.json
+yarn.lock
+.vscode
+.idea
