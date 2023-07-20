@@ -1,18 +1,8 @@
-export enum SenderType {
-  AI,
-  USER,
-}
-
-export interface IMessage {
-  id: string;
-  text: string;
-  sender: SenderType;
-}
-
+import { ChatCompletionRequestMessage } from 'openai';
 export interface MessageBoardProps {
-  messages: IMessage[];
+  messages: ChatCompletionRequestMessage[];
 }
 
 export interface MessageProps {
-  message: IMessage;
+  message: ChatCompletionRequestMessage;
 }
