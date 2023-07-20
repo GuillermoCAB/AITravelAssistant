@@ -17,6 +17,7 @@ const Layout: React.FC<LayoutProps> = ({
   xl,
   children,
   ow,
+  id,
 }) => {
   const style: React.CSSProperties = {
     display,
@@ -35,7 +36,7 @@ const Layout: React.FC<LayoutProps> = ({
   } ${lg ? `lg-${lg}` : ''} ${xl ? `xl-${xl}` : ''}`;
 
   return (
-    <div style={style} className={className}>
+    <div id={id} style={style} className={className}>
       {children}
     </div>
   );

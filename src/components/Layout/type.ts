@@ -23,4 +23,5 @@ export interface LayoutProps {
   xl?: ResponsiveSizeTypes;
   children: React.ReactNode;
   ow?: CSSProperties;
+  id?: string;
 }
