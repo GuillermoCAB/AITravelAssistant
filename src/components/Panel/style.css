@@ -1,0 +1,15 @@
+#Panel {
+  .container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 2rem;
+
+    .scheduleItem {
+      margin: 16px;
+    }
+
+  }
+}
