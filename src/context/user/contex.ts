@@ -1,0 +1,6 @@
+import { createContext } from 'react';
+import { UserContextType } from './type';
+
+const UserContext = createContext<UserContextType>({} as UserContextType);
+
+export default UserContext;
