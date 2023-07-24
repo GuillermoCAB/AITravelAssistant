@@ -8,7 +8,7 @@ const MessageBoard: React.FC<MessageBoardProps> = ({ messages }) => {
   return (
     <Layout ow={{ maxHeight: '94%' }}>
       <div id="MessageBoard">
-        {messages.map(message => {
+        {messages?.map(message => {
           return <Message message={message} />;
         })}
       </div>

@@ -1,11 +1,10 @@
 import { ChatCompletionRequestMessage } from 'openai';
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PanelMenuValues, ScheduleType, UserContextType } from './type';
 import { defaultValues } from './defaults';
+import UserContext from './contex';
 
 const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  const UserContext = createContext<UserContextType>({} as UserContextType);
-
   // Initialize from localStorage or use a default
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>(
     () => {
