@@ -2,7 +2,7 @@ import { Configuration, OpenAIApi } from 'openai';
 import { CallOpenAIParams } from '../types/openAI';
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
