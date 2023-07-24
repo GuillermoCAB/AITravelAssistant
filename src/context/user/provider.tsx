@@ -1,10 +1,11 @@
 import { ChatCompletionRequestMessage } from 'openai';
-import React, { useEffect, useState } from 'react';
-import UserContext from './contex';
-import { ScheduleType } from './type';
+import React, { createContext, useEffect, useState } from 'react';
+import { PanelMenuValues, ScheduleType, UserContextType } from './type';
 import { defaultValues } from './defaults';
 
 const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+  const UserContext = createContext<UserContextType>({} as UserContextType);
+
   // Initialize from localStorage or use a default
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>(
     () => {
@@ -23,6 +24,10 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     const savedSchedule = localStorage.getItem('schedule');
     return savedSchedule ? JSON.parse(savedSchedule) : {};
   });
+
+  const [panelMenu, setPanelMenu] = useState<PanelMenuValues>(
+    PanelMenuValues.car
+  );
 
   // Save to localStorage whenever state changes
   useEffect(() => {
@@ -43,9 +48,11 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         messages,
         userId,
         schedule,
+        panelMenu,
         setMessages,
         setUserId,
         setSchedule,
+        setPanelMenu,
       }}
     >
       {children}

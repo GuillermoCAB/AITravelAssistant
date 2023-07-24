@@ -4,6 +4,7 @@ typechain
 coverage
 build
 .env
+.testData
 
 #IDE files
 package-lock.json

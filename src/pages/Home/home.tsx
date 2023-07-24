@@ -1,24 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './style.css';
-import {
-  ChatCompletionRequestMessageRoleEnum,
-  ChatCompletionRequestMessage,
-  CreateChatCompletionResponse,
-} from 'openai';
 
-import { callOpenAI } from '../../utils/openAI';
-
-import { MessageBoard, ChatInput, Layout, Panel } from '../../components';
-import { parseDate, parseTime } from '../../utils/parsers';
 import UserContext from '../../context/user/contex';
 
-interface scheduleMeetingParams {
-  date: string;
-  time: string;
-  name: string;
-  email: string;
-  vehicle: string;
-}
+import { callOpenAI } from '../../utils/openAI';
+import { parseDate, parseTime } from '../../utils/parsers';
+
+import { MessageBoard, ChatInput, Layout, Panel } from '../../components';
+
+import {
+  ChatCompletionRequestMessageRoleEnum,
+  type ChatCompletionRequestMessage,
+  type CreateChatCompletionResponse,
+} from 'openai';
+import type { scheduleMeetingParams } from './types';
 
 const openAIFunctions = [
   {

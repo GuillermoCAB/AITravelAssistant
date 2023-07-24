@@ -1,30 +1,26 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode, useContext, useMemo } from 'react';
 import './style.css';
 import type { PanelProps } from './type';
 import Layout from '../Layout';
 import UserContext from '../../context/user/contex';
-import Typograph from '../Typograph';
+import PanelMenu from './PanelMenu';
+import Calendar from '../Calendar';
 
 const Panel: React.FC<PanelProps> = ({}) => {
-  const { userId, schedule } = useContext(UserContext);
+  const { panelMenu } = useContext(UserContext);
 
-  const renderSchedule = (): ReactNode => {
-    let result: ReactNode[] = [];
+  const renderPanelMenu = useMemo(() => {
+    switch (panelMenu) {
+      case 'car':
+        break;
 
-    Object.keys(schedule).map(day => {
-      Object.keys(schedule[day]).map(hour => {
-        return result.push(
-          <div className="scheduleItem">
-            <Typograph type="p">
-              {day} - {hour} - Vehicle: {schedule[day][hour].vehicle}
-            </Typograph>
-          </div>
-        );
-      });
-    });
+      case 'schedule':
+        return <Calendar />;
 
-    return result;
-  };
+      default:
+        break;
+    }
+  }, [panelMenu]);
 
   return (
     <Layout
@@ -40,10 +36,8 @@ const Panel: React.FC<PanelProps> = ({}) => {
         position: 'relative',
       }}
     >
-      <div className="container">
-        <Typograph type="h4">Scheduled test drives:</Typograph>
-        {renderSchedule()}
-      </div>
+      <div className="container">{renderPanelMenu}</div>
+      <PanelMenu />
     </Layout>
   );
 };
