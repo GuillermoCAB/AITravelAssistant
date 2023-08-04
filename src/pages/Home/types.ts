@@ -5,3 +5,7 @@ export type scheduleMeetingParams = {
   email: string;
   vehicle: string;
 };
+
+export type selectCarParams = {
+  carName: string;
+};
