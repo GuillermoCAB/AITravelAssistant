@@ -1,10 +1,12 @@
-import React, { ReactNode, useContext, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import './style.css';
 import type { PanelProps } from './type';
 import Layout from '../Layout';
 import UserContext from '../../context/user/contex';
 import PanelMenu from './PanelMenu';
 import Calendar from '../Calendar';
+import Cars from '../Cars';
+import PanelLoader from './PanelLoader';
 
 const Panel: React.FC<PanelProps> = ({}) => {
   const { panelMenu } = useContext(UserContext);
@@ -12,7 +14,7 @@ const Panel: React.FC<PanelProps> = ({}) => {
   const renderPanelMenu = useMemo(() => {
     switch (panelMenu) {
       case 'car':
-        break;
+        return <Cars />;
 
       case 'schedule':
         return <Calendar />;
@@ -30,7 +32,7 @@ const Panel: React.FC<PanelProps> = ({}) => {
       display="flex"
       flexDirection="column"
       ow={{
-        backgroundColor: 'var(--secondary-color)',
+        backgroundColor: 'var(--white-color)',
         height: '100%',
         overflow: 'hidden',
         position: 'relative',
@@ -38,6 +40,7 @@ const Panel: React.FC<PanelProps> = ({}) => {
     >
       <div className="container">{renderPanelMenu}</div>
       <PanelMenu />
+      <PanelLoader />
     </Layout>
   );
 };
