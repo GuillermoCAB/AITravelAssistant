@@ -13,50 +13,23 @@ import {
   type ChatCompletionRequestMessage,
   type CreateChatCompletionResponse,
 } from 'openai';
-import type { scheduleMeetingParams } from './types';
+import type { scheduleMeetingParams, selectCarParams } from './types';
 
-const openAIFunctions = [
-  {
-    name: 'scheduleMeeting',
-    description:
-      'Schedule a meeting for the user on the nearest Audi store. If the desired time is already booked then return an error message',
-    parameters: {
-      type: 'object',
-      properties: {
-        date: {
-          type: 'string',
-          description:
-            'The date the user wants to visit. Should follow the format mm/dd/yyyy',
-        },
-        time: {
-          type: 'string',
-          description:
-            'The time the user wants to visit. We use the 24 hours model, also it only works from 08 until 19. Should follow the format hh:mm',
-        },
-        name: {
-          type: 'string',
-          description:
-            'The name of the user so we can add on the booked time info',
-        },
-        email: {
-          type: 'string',
-          description:
-            'The email of the user so we can add on the booked time info',
-        },
-        vehicle: {
-          type: 'string',
-          description:
-            'The name of the vehicle the user wants to do the test drive. Can add multiple names, can add as much informations as you have, for example if you have the trim, the model, and any other subtype add here.',
-        },
-      },
-      required: ['date', 'time', 'name', 'email', 'vehicle'],
-    },
-  },
-];
+import carsArray from '../../constants/cars';
+import openAIFuncs from '../../constants/openAIFuncs';
+import { PanelMenuValues } from '../../context/user/type';
 
 const Home: React.FC = () => {
-  const { messages, userId, schedule, setMessages, setUserId, setSchedule } =
-    useContext(UserContext);
+  const {
+    messages,
+    userId,
+    schedule,
+    setMessages,
+    setUserId,
+    setSchedule,
+    setSelectedCar,
+    setPanelMenu,
+  } = useContext(UserContext);
 
   const scheduleMeeting = ({
     date,
@@ -65,6 +38,11 @@ const Home: React.FC = () => {
     email,
     vehicle,
   }: scheduleMeetingParams): string => {
+    if (!date) return 'Need schedule date';
+    if (!time) return 'Need schedule time';
+    if (!name) return 'Need user name';
+    if (!email) return 'Need user email';
+
     const formattedDate = parseDate({ date });
     const { formattedTime, hours } = parseTime({ time });
 
@@ -87,13 +65,27 @@ const Home: React.FC = () => {
       };
 
       setSchedule(updateSchedule);
+      setPanelMenu(PanelMenuValues.schedule);
 
       return 'Booked with success';
     }
   };
 
+  const selectCar = ({ carName }: selectCarParams): string => {
+    const targetIndex = carsArray.findIndex(car => car.name === carName);
+
+    if (targetIndex < 0)
+      return `Can't find any car with the name of ${carName}`;
+
+    setPanelMenu(PanelMenuValues.car);
+    setSelectedCar(carsArray[targetIndex]);
+
+    return `Changed UI to show ${carName} with success!`;
+  };
+
   const availableFunctions: { [key: string]: Function } = {
     scheduleMeeting,
+    selectCar,
   };
 
   const onSendMessage = async (
@@ -119,7 +111,7 @@ const Home: React.FC = () => {
 
     const res: CreateChatCompletionResponse = await callOpenAI({
       messages: updatedMessages,
-      functions: openAIFunctions,
+      functions: openAIFuncs,
     });
 
     console.log('GPT Response:', res);

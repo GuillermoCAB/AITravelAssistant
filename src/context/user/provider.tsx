@@ -1,8 +1,9 @@
 import { ChatCompletionRequestMessage } from 'openai';
 import React, { useEffect, useState } from 'react';
-import { PanelMenuValues, ScheduleType, UserContextType } from './type';
+import { PanelMenuValues, ScheduleType } from './type';
 import { defaultValues } from './defaults';
 import UserContext from './contex';
+import carsArray from '../../constants/cars';
 
 const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   // Initialize from localStorage or use a default
@@ -14,6 +15,7 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         : [...defaultValues.messages];
     }
   );
+
   const [userId, setUserId] = useState<string>(() => {
     const savedUserId = localStorage.getItem('userId');
     return savedUserId ?? '';
@@ -27,6 +29,9 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [panelMenu, setPanelMenu] = useState<PanelMenuValues>(
     PanelMenuValues.car
   );
+
+  const [selectedCar, setSelectedCar] = useState<any>(carsArray[0]);
+  const [panelIsLoading, setPanelIsLoading] = useState<boolean>(false);
 
   // Save to localStorage whenever state changes
   useEffect(() => {
@@ -48,10 +53,14 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         userId,
         schedule,
         panelMenu,
+        selectedCar,
+        panelIsLoading,
         setMessages,
         setUserId,
         setSchedule,
         setPanelMenu,
+        setSelectedCar,
+        setPanelIsLoading,
       }}
     >
       {children}

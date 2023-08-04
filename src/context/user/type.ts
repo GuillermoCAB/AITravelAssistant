@@ -20,6 +20,8 @@ export type UserContextType = {
   userId: string;
   schedule: ScheduleType;
   panelMenu: PanelMenuValues;
+  selectedCar: any;
+  panelIsLoading: boolean;
   setMessages: (
     message:
       | ChatCompletionRequestMessage[]
@@ -33,5 +35,9 @@ export type UserContextType = {
   ) => void;
   setPanelMenu: (
     menu: PanelMenuValues | ((prevState: PanelMenuValues) => PanelMenuValues)
+  ) => void;
+  setSelectedCar: (schedule: any | ((prevState: any) => any)) => void;
+  setPanelIsLoading: (
+    loading: boolean | ((prevState: boolean) => boolean)
   ) => void;
 };
