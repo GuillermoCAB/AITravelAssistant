@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.css';
-import { MessageProps } from './type';
+import { MessageData, MessageProps } from './type';
 import { ChatCompletionRequestMessageRoleEnum } from 'openai';
 import ResponsiveImage from '../ResponsiveImage';
+import sendMessageToBackend from '../../utils/messageToBackend'
 
 const Message: React.FC<MessageProps> = ({ message }) => {
+
+  useEffect(() => {
+    if (message.role === ChatCompletionRequestMessageRoleEnum.User) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+
+          const messageData: MessageData = {
+            content: message.content || '',
+            timestamp: new Date().toISOString(),
+            latitude,
+            longitude,
+            user: 'anonymous', // Replace with actual user information when available
+          };
+
+          // Call the sendMessageToBackend function to send the message data to the backend
+          sendMessageToBackend(messageData)
+            .then(response => {
+              console.log('Message sent to backend:', response);
+            })
+            .catch(error => {
+              console.error('Error sending message to backend:', error);
+            });
+        },
+        error => {
+          console.error('Error getting user location:', error);
+        }
+      );
+    }
+  }, [message]);
+
   if (
     message.role === ChatCompletionRequestMessageRoleEnum.System ||
     message.role === ChatCompletionRequestMessageRoleEnum.Function
@@ -13,6 +45,7 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   }
 
   if (message.function_call) {
+
     return (
       <div className="message-item">
         <div className="message-badge">
