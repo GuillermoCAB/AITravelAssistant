@@ -1,4 +1,4 @@
-import { BoldTypes, ColorTypes, TypographyTypes } from "../../types/style";
+import { BoldTypes, ColorTypes, TypographyTypes } from '../../types/style';
 
 export interface TypographyProps {
   type: TypographyTypes;
@@ -6,4 +6,5 @@ export interface TypographyProps {
   bold?: BoldTypes;
   margin?: string;
   children: React.ReactNode;
+  textAlign?: 'left' | 'right' | 'center';
 }

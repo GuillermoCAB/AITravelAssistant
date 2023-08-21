@@ -8,16 +8,14 @@ const Calendar: React.FC = () => {
   const renderSchedule = (): ReactNode => {
     let result: ReactNode[] = [];
 
-    Object.keys(schedule).map(day => {
-      Object.keys(schedule[day]).map(hour => {
-        return result.push(
-          <div className="scheduleItem">
-            <Typograph type="p">
-              {day} - {hour} - Vehicle: {schedule[day][hour].vehicle}
-            </Typograph>
-          </div>
-        );
-      });
+    schedule.map(meeting => {
+      return result.push(
+        <div className="scheduleItem">
+          <Typograph type="p">
+            {meeting.date} - {meeting.hour} - Vehicle: {meeting.vehicle}
+          </Typograph>
+        </div>
+      );
     });
 
     return result;
@@ -25,7 +23,9 @@ const Calendar: React.FC = () => {
 
   return (
     <div>
-      <Typograph type="h4">Scheduled test drives:</Typograph>
+      <Typograph textAlign="center" type="h4">
+        Scheduled test drives:
+      </Typograph>
       {renderSchedule()}
     </div>
   );

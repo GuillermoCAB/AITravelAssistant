@@ -3,7 +3,7 @@ import { CallOpenAIParams } from '../types/openAI';
 
 const configuration = new Configuration({
   // @ts-ignore
-  apiKey: import.meta.env.REACT_APP_OPENAI_API_KEY,
+  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);

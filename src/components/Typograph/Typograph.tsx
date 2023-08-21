@@ -10,13 +10,19 @@ const Typography: React.FC<TypographyProps> = ({
   bold,
   margin = '0',
   children,
+  textAlign,
 }) => {
   const classes = `${Component}`;
 
   return (
     <Component
       className={classes}
-      style={{ margin, fontWeight: bold, color: colorMap[color as ColorTypes] }}
+      style={{
+        margin,
+        fontWeight: bold,
+        color: colorMap[color as ColorTypes],
+        textAlign,
+      }}
     >
       {children}
     </Component>

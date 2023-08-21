@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './style.css';
 import type { ChatInputProps } from './type';
 import Button from '../Button';
@@ -23,19 +23,22 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
     setMessage(event.target.value);
   };
 
-  const handleSend = () => {
+  const handleSend = useCallback(() => {
     if (message.trim() !== '') {
       onSendMessage(message);
       setMessage('');
     }
-  };
+  }, [onSendMessage, message]);
 
-  const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      handleSend();
-    }
-  };
+  const handleKeyPress = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        handleSend();
+      }
+    },
+    [handleSend]
+  );
 
   return (
     <div className="chat-input">

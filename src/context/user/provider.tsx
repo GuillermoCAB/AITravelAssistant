@@ -1,9 +1,12 @@
 import { ChatCompletionRequestMessage } from 'openai';
 import React, { useEffect, useState } from 'react';
-import { PanelMenuValues, ScheduleType } from './type';
+import { PanelMenuValues } from './type';
 import { defaultValues } from './defaults';
 import UserContext from './contex';
 import carsArray from '../../constants/cars';
+import { ISchedule } from '../../types/schedule';
+import { IUser } from '../../types/user';
+import { TokenType } from '../../types/services';
 
 const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   // Initialize from localStorage or use a default
@@ -16,51 +19,37 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     }
   );
 
-  const [userId, setUserId] = useState<string>(() => {
-    const savedUserId = localStorage.getItem('userId');
-    return savedUserId ?? '';
-  });
-
-  const [schedule, setSchedule] = useState<ScheduleType>(() => {
-    const savedSchedule = localStorage.getItem('schedule');
-    return savedSchedule ? JSON.parse(savedSchedule) : {};
-  });
-
+  const [user, setUser] = useState<Partial<IUser>>({});
+  const [schedule, setSchedule] = useState<ISchedule[]>([]);
   const [panelMenu, setPanelMenu] = useState<PanelMenuValues>(
     PanelMenuValues.car
   );
-
   const [selectedCar, setSelectedCar] = useState<any>(carsArray[0]);
   const [panelIsLoading, setPanelIsLoading] = useState<boolean>(false);
+  const [token, setToken] = useState<TokenType>();
 
   // Save to localStorage whenever state changes
   useEffect(() => {
     localStorage.setItem('messages', JSON.stringify(messages));
   }, [messages]);
 
-  useEffect(() => {
-    localStorage.setItem('userId', userId);
-  }, [userId]);
-
-  useEffect(() => {
-    localStorage.setItem('schedule', JSON.stringify(schedule));
-  }, [schedule]);
-
   return (
     <UserContext.Provider
       value={{
         messages,
-        userId,
+        user,
         schedule,
         panelMenu,
         selectedCar,
         panelIsLoading,
+        token,
         setMessages,
-        setUserId,
+        setUser,
         setSchedule,
         setPanelMenu,
         setSelectedCar,
         setPanelIsLoading,
+        setToken,
       }}
     >
       {children}

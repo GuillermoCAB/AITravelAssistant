@@ -1,27 +1,21 @@
 import { ChatCompletionRequestMessage } from 'openai';
+import { ISchedule } from '../../types/schedule';
+import { IUser } from '../../types/user';
+import { TokenType } from '../../types/services';
 
 export enum PanelMenuValues {
   car = 'car',
   schedule = 'schedule',
 }
 
-export type ScheduleType = {
-  [key: string]: {
-    [key: string]: {
-      name: string;
-      email: string;
-      vehicle: string;
-    };
-  };
-};
-
 export type UserContextType = {
   messages: ChatCompletionRequestMessage[];
-  userId: string;
-  schedule: ScheduleType;
+  user: Partial<IUser>;
+  schedule: ISchedule[];
   panelMenu: PanelMenuValues;
   selectedCar: any;
   panelIsLoading: boolean;
+  token: string | undefined;
   setMessages: (
     message:
       | ChatCompletionRequestMessage[]
@@ -29,9 +23,11 @@ export type UserContextType = {
           prevState: ChatCompletionRequestMessage[]
         ) => ChatCompletionRequestMessage[])
   ) => void;
-  setUserId: (userId: string | ((prevState: string) => string)) => void;
+  setUser: (
+    user: Partial<IUser> | ((prevState: Partial<IUser>) => Partial<IUser>)
+  ) => void;
   setSchedule: (
-    schedule: ScheduleType | ((prevState: ScheduleType) => ScheduleType)
+    schedule: ISchedule[] | ((prevState: ISchedule[]) => ISchedule[])
   ) => void;
   setPanelMenu: (
     menu: PanelMenuValues | ((prevState: PanelMenuValues) => PanelMenuValues)
@@ -40,4 +36,5 @@ export type UserContextType = {
   setPanelIsLoading: (
     loading: boolean | ((prevState: boolean) => boolean)
   ) => void;
+  setToken: (token: TokenType | ((prevState: TokenType) => TokenType)) => void;
 };
