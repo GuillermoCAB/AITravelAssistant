@@ -3,7 +3,6 @@
   font-size: 1rem;
   border-radius: 5px;
   padding: 10px 15px;
-  margin: 5px;
   cursor: pointer;
 
   &:disabled {
@@ -14,27 +13,27 @@
 }
 
 .btn.primary.solid {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--light-color);
+  color: var(--primary-color);;
   border: none;
 }
 
 .btn.secondary.solid {
   background-color: var(--secondary-color);
-  color: white;
+  color: var(--primary-color);
   border: none;
 }
 
 .btn.primary.outlined {
   background-color: transparent;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  color: var(--light-color);
+  border: 2px solid var(--secondary-color);
 }
 
 .btn.secondary.outlined {
   background-color: transparent;
   color: var(--secondary-color);
-  border: 2px solid var(--secondary-color);
+  border: 2px solid var(--light-color);
 }
 
 .btn.small {

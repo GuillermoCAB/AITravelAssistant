@@ -1,5 +1,5 @@
 .chat-input {
-  background-color: var(--primary-color);
+  background-color: var(--light-color);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

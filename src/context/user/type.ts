@@ -2,6 +2,8 @@ import { ChatCompletionRequestMessage } from 'openai';
 import { ISchedule } from '../../types/schedule';
 import { IUser } from '../../types/user';
 import { TokenType } from '../../types/services';
+import { MutableRefObject } from 'react';
+import { ICar } from '../../types/cars';
 
 export enum PanelMenuValues {
   car = 'car',
@@ -13,9 +15,9 @@ export type UserContextType = {
   user: Partial<IUser>;
   schedule: ISchedule[];
   panelMenu: PanelMenuValues;
-  selectedCar: any;
+  selectedCar: ICar;
   panelIsLoading: boolean;
-  token: string | undefined;
+  token: MutableRefObject<TokenType>;
   setMessages: (
     message:
       | ChatCompletionRequestMessage[]
@@ -32,9 +34,8 @@ export type UserContextType = {
   setPanelMenu: (
     menu: PanelMenuValues | ((prevState: PanelMenuValues) => PanelMenuValues)
   ) => void;
-  setSelectedCar: (schedule: any | ((prevState: any) => any)) => void;
+  setSelectedCar: (schedule: ICar | ((prevState: ICar) => ICar)) => void;
   setPanelIsLoading: (
     loading: boolean | ((prevState: boolean) => boolean)
   ) => void;
-  setToken: (token: TokenType | ((prevState: TokenType) => TokenType)) => void;
 };

@@ -1,5 +1,5 @@
 import { ChatCompletionRequestMessage } from 'openai';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PanelMenuValues } from './type';
 import { defaultValues } from './defaults';
 import UserContext from './contex';
@@ -7,6 +7,7 @@ import carsArray from '../../constants/cars';
 import { ISchedule } from '../../types/schedule';
 import { IUser } from '../../types/user';
 import { TokenType } from '../../types/services';
+import { ICar } from '../../types/cars';
 
 const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   // Initialize from localStorage or use a default
@@ -24,9 +25,9 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [panelMenu, setPanelMenu] = useState<PanelMenuValues>(
     PanelMenuValues.car
   );
-  const [selectedCar, setSelectedCar] = useState<any>(carsArray[0]);
+  const [selectedCar, setSelectedCar] = useState<ICar>(carsArray[0]);
   const [panelIsLoading, setPanelIsLoading] = useState<boolean>(false);
-  const [token, setToken] = useState<TokenType>();
+  const token = useRef<TokenType>();
 
   // Save to localStorage whenever state changes
   useEffect(() => {
@@ -49,7 +50,6 @@ const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         setPanelMenu,
         setSelectedCar,
         setPanelIsLoading,
-        setToken,
       }}
     >
       {children}

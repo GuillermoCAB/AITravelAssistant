@@ -1,16 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './style.css';
 import UserContext from '../../context/user/contex';
 import ResponsiveImage from '../ResponsiveImage';
 
 const PanelLoader: React.FC = ({}) => {
-  const { panelIsLoading, setPanelIsLoading } = useContext(UserContext);
-
-  useEffect(() => {
-    setInterval(() => {
-      setPanelIsLoading(prev => !prev);
-    }, 10000);
-  }, []);
+  const { panelIsLoading } = useContext(UserContext);
 
   return (
     <div className={`panelLoader ${panelIsLoading ? 'isLoading' : ''}`}>

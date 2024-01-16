@@ -1,7 +1,6 @@
 :root {
-  --primary-color: #007bff;
-  --primary-color-transparent90: #007bff90;
-  --secondary-color: #52bb93;
+  --primary-color: #F1F1F1;
+  --secondary-color: #1D1D1D;
   --success-color: #28a745;
   --info-color: #17a2b8;
   --warning-color: #ffc107;
@@ -36,7 +35,7 @@ button {
 
 a {
   text-decoration: none;
-  color: var(--primary-color);
+  color: var(--info-color);
   font-weight: 600;
 }
 

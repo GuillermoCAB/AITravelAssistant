@@ -53,24 +53,6 @@ const carsArray = [
     batterySize: 106,
     to60: 5.4,
   },
-  {
-    id: 'd23232g',
-    name: 'Audi A7',
-    thumbnail: '/images/cars/a7/img.png',
-    images: [
-      '/images/cars/a7/img1.png',
-      '/images/cars/a7/img2.png',
-      '/images/cars/a7/img3.png',
-      '/images/cars/a7/img4.png',
-      '/images/cars/a7/img5.png',
-      '/images/cars/a7/img6.png',
-      '/images/cars/a7/img7.png',
-      '/images/cars/a7/img8.png',
-    ],
-    hp: 335,
-    torque: 369,
-    to60: 5.2,
-  },
 ];
 
 export const carsArrayName = carsArray.map(car => car.name);

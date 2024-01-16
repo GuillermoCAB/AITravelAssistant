@@ -7,26 +7,10 @@ import ResponsiveImage from '../ResponsiveImage';
 const Message: React.FC<MessageProps> = ({ message }) => {
   if (
     message.role === ChatCompletionRequestMessageRoleEnum.System ||
-    message.role === ChatCompletionRequestMessageRoleEnum.Function
+    message.role === ChatCompletionRequestMessageRoleEnum.Function ||
+    message.function_call
   ) {
     return;
-  }
-
-  if (message.function_call) {
-    return (
-      <div className="message-item">
-        <div className="message-badge">
-          <ResponsiveImage
-            src={'/images/greenCheck/img.png'}
-            alt="Assistant Badge"
-            width={34}
-            height={34}
-          />
-        </div>
-        <div className="message-triangle"></div>
-        <div className="message-body">{message.function_call.name}</div>
-      </div>
-    );
   }
 
   if (message.role === ChatCompletionRequestMessageRoleEnum.User) {
@@ -34,12 +18,12 @@ const Message: React.FC<MessageProps> = ({ message }) => {
       <div className="message-item">
         <div className="message-body user">{message.content}</div>
         <div className="message-triangle-user"></div>
-        <div className="message-badge">
+        <div className="message-badge user">
           <ResponsiveImage
-            src={'/images/greenCheck/img.png'}
+            src={'/images/userIcon/img.png'}
             alt="Assistant Badge"
-            width={34}
-            height={34}
+            width={31.1}
+            height={27.6}
           />
         </div>
       </div>
@@ -50,10 +34,10 @@ const Message: React.FC<MessageProps> = ({ message }) => {
     <div className="message-item">
       <div className="message-badge">
         <ResponsiveImage
-          src={'/images/greenCheck/img.png'}
+          src={'/images/logo/img.png'}
           alt="Assistant Badge"
-          width={34}
-          height={34}
+          width={37.7}
+          height={19.1}
         />
       </div>
       <div className="message-triangle"></div>

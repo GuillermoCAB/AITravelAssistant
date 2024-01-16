@@ -41,19 +41,25 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
   );
 
   return (
-    <div className="chat-input">
-      <textarea
-        ref={textareaRef}
-        className="chat-input-field"
-        value={message}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyPress}
-        rows={1}
-      />
-      <Button disabled={!message.length} color="secondary" onClick={handleSend}>
-        Send
-      </Button>
-    </div>
+    <>
+      <div className="chat-input">
+        <textarea
+          ref={textareaRef}
+          className="chat-input-field"
+          value={message}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
+          rows={1}
+        />
+        <Button
+          disabled={!message.length}
+          color="secondary"
+          onClick={handleSend}
+        >
+          Send
+        </Button>
+      </div>
+    </>
   );
 };
 

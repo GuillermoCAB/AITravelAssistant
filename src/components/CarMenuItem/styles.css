@@ -1,0 +1,39 @@
+#CarMenuItem {
+    margin: 0 25px;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    p {
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+
+    .responsive-image-wrapper>picture>img {
+      transition: all ease 0.3s;
+    }
+
+    &.selected {
+      p {
+        font-weight: 700;
+        text-decoration: underline;
+        color: black;
+      }
+
+    }
+
+    &:hover {
+      p {
+        font-weight: 700;
+        text-decoration: underline;
+      }
+
+      .responsive-image-wrapper>picture>img {
+        transform: scale(1.2);
+      }
+    }
+  }

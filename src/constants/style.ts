@@ -1,4 +1,4 @@
-import { ColorTypes } from "../types/style";
+import { ColorTypes } from '../types/style';
 
 export const colorMap: Record<ColorTypes, string> = {
   primary: 'var(--primary-color)',

@@ -17,92 +17,10 @@
 
     overflow: hidden;
 
-    .item {
-      margin: 0 25px;
-      width: 300px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-
-      p {
-        font-weight: 500;
-        color: var(--dark-color);
-      }
-      
-      .responsive-image-wrapper>picture>img {
-          transition: all ease 0.3s;
-        }
-
-      &.selected {
-        p {
-          font-weight: 700;
-          text-decoration: underline;
-          color: black;
-        }
-
-      }
-
-      &:hover {
-        p {
-          font-weight: 700;
-          text-decoration: underline;
-        }
-        .responsive-image-wrapper > picture > img {
-          transform: scale(1.2);
-        }
-      }
-    }
-
     .swipe {
       background-color: transparent;
       border: none;
       font-size: 44px;
-    }
-  }
-
-  .gallery {
-    margin-top: 20px 0 0;
-
-    .optionsRow {
-      margin: 0 0;
-      width: 100%;
-      height: 44px;
-
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      .opt {
-        width: calc(100%/8);
-        cursor: pointer;
-      }
-
-    }
-  }
-
-  .info {
-    margin: 60px 0 0;
-    width: 100%;
-    height: auto;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    .item {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .row {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-      }
     }
   }
 }
